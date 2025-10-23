@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infusionsoft Dynamic Embed Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Infusionsoft Dynamic Embed Generator</h1>
+    <p>Generate self-contained snippets to embed a dynamically sized GoHighLevel page around your Infusionsoft form.</p>
+  </header>
+
+  <main class="app-main">
+    <section class="card">
+      <form id="config-form" class="config-form">
+        <div class="field-group">
+          <label for="iframeUrl">Page to embed</label>
+          <input type="url" id="iframeUrl" name="iframeUrl" placeholder="https://example.com/landing-page" required>
+          <p class="hint">Use the public URL of your GoHighLevel page.</p>
+        </div>
+
+        <div class="field-group">
+          <span class="label">Placement relative to Infusionsoft form</span>
+          <div class="option-row">
+            <label class="option">
+              <input type="radio" name="placement" value="above" checked>
+              <span>Above the form</span>
+            </label>
+            <label class="option">
+              <input type="radio" name="placement" value="below">
+              <span>Below the form</span>
+            </label>
+          </div>
+          <p class="hint">Snippets can be pasted into either the custom header or footer. They will position themselves automatically.</p>
+        </div>
+
+        <div class="field-group">
+          <label for="formSelector">Infusionsoft form selector</label>
+          <input type="text" id="formSelector" name="formSelector" value="#content" required>
+          <p class="hint">Default <code>#content</code> works for most Infusionsoft order forms.</p>
+        </div>
+
+        <div class="field-group">
+          <label for="buttonClass">GoHighLevel button class</label>
+          <input type="text" id="buttonClass" name="buttonClass" value="ghl-scroll-to-form" required>
+          <p class="hint">Apply this class to any button that should scroll the parent page to the form.</p>
+        </div>
+
+        <div class="field-pair">
+          <div class="field-group">
+            <label for="minHeight">Minimum iframe height (px)</label>
+            <input type="number" id="minHeight" name="minHeight" value="600" min="200" step="50">
+          </div>
+          <div class="field-group">
+            <label for="scrollOffset">Scroll offset (px)</label>
+            <input type="number" id="scrollOffset" name="scrollOffset" value="-40" step="10">
+            <p class="hint">Negative values keep the form headline in view after scrolling.</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button type="submit" class="primary">Generate snippets</button>
+          <button type="button" id="reset-btn" class="secondary">Reset</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="output" class="card output" hidden>
+      <div class="output-header">
+        <h2>Your snippets</h2>
+        <p>Paste the Infusionsoft snippet into the custom header or footer. Paste the GoHighLevel snippet into the page settings.</p>
+      </div>
+
+      <article class="snippet">
+        <header class="snippet-header">
+          <h3>Infusionsoft (Custom Header/Footer)</h3>
+          <button type="button" class="copy-btn" data-copy-target="infusionsoftCode">Copy</button>
+        </header>
+        <pre class="code-block"><code id="infusionsoftCode"></code></pre>
+      </article>
+
+      <article class="snippet">
+        <header class="snippet-header">
+          <h3>GoHighLevel (Page Custom Code)</h3>
+          <button type="button" class="copy-btn" data-copy-target="gohighlevelCode">Copy</button>
+        </header>
+        <pre class="code-block"><code id="gohighlevelCode"></code></pre>
+      </article>
+
+      <section class="notes">
+        <h3>Implementation checklist</h3>
+        <ul>
+          <li>Add <code>ghl-scroll-to-form</code> to each button that should trigger the scroll.</li>
+          <li>Publish your GoHighLevel page with the generated script inside the page head/footer.</li>
+          <li>Paste the Infusionsoft snippet into the order form custom header or footer.</li>
+          <li>Load the form page and confirm iframe resizing and scroll behavior.</li>
+        </ul>
+      </section>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Need tweaks? Adjust the settings above and regenerate new snippets.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
