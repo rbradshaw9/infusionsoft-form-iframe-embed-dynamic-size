@@ -256,13 +256,15 @@ function buildInfusionsoftSnippet({
       if (!target) {
         return;
       }
-      try {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } catch (error) {
-        target.scrollIntoView(true);
-      }
+      var rect = target.getBoundingClientRect();
+      var absoluteTop = rect.top + (window.pageYOffset || document.documentElement.scrollTop || 0);
       if (config.scrollOffset) {
-        window.scrollBy({ top: config.scrollOffset, left: 0, behavior: 'auto' });
+        absoluteTop += config.scrollOffset;
+      }
+      try {
+        window.scrollTo({ top: absoluteTop, left: 0, behavior: 'smooth' });
+      } catch (error) {
+        window.scrollTo(0, absoluteTop);
       }
     }
   }
