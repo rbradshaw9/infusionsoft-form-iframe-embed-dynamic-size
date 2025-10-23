@@ -6,6 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const infusionsoftCodeEl = document.getElementById('infusionsoftCode');
   const gohighlevelCodeEl = document.getElementById('gohighlevelCode');
   const resetBtn = document.getElementById('reset-btn');
+  const advancedToggle = document.getElementById('advanced-toggle');
+  const advancedContent = document.getElementById('advanced-content');
+
+  // Advanced options toggle
+  advancedToggle.addEventListener('click', () => {
+    const isExpanded = advancedContent.classList.toggle('expanded');
+    advancedToggle.classList.toggle('active', isExpanded);
+  });
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();

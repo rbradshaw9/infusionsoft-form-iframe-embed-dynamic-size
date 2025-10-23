@@ -3,106 +3,276 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infusionsoft Dynamic Embed Generator</title>
+  <title>Dynamic Embed Generator | Infusionsoft + GoHighLevel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="grain-overlay"></div>
+  <div class="gradient-bg"></div>
+  
   <header class="app-header">
-    <h1>Infusionsoft Dynamic Embed Generator</h1>
-    <p>Generate self-contained snippets to embed a dynamically sized GoHighLevel page around your Infusionsoft form.</p>
+    <div class="logo">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="48" height="48" rx="12" fill="url(#logo-gradient)"/>
+        <path d="M24 14L30 20L24 26L18 20L24 14Z" fill="white" opacity="0.9"/>
+        <path d="M24 22L30 28L24 34L18 28L24 22Z" fill="white" opacity="0.6"/>
+        <defs>
+          <linearGradient id="logo-gradient" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6366F1"/>
+            <stop offset="1" stop-color="#8B5CF6"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <h1>Dynamic Embed Generator</h1>
+    <p class="subtitle">Seamlessly embed GoHighLevel pages into Infusionsoft with automatic resizing and scroll coordination</p>
   </header>
 
   <main class="app-main">
     <section class="card">
+      <div class="card-header">
+        <h2>Configure Your Embed</h2>
+        <p>Customize the behavior and appearance of your embedded content</p>
+      </div>
+      
       <form id="config-form" class="config-form">
         <div class="field-group">
-          <label for="iframeUrl">Page to embed</label>
-          <input type="url" id="iframeUrl" name="iframeUrl" placeholder="https://example.com/landing-page" required>
-          <p class="hint">Use the public URL of your GoHighLevel page.</p>
+          <label for="iframeUrl">
+            <span class="label-text">Page to Embed</span>
+            <span class="label-badge">Required</span>
+          </label>
+          <div class="input-wrapper">
+            <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M8.5 3H5C3.89543 3 3 3.89543 3 5V15C3 16.1046 3.89543 17 5 17H15C16.1046 17 17 16.1046 17 15V11.5M10 10L17 3M17 3H13M17 3V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <input type="url" id="iframeUrl" name="iframeUrl" placeholder="https://go.yourdomain.com/landing-page" required>
+          </div>
+          <p class="hint">Enter the public URL of your GoHighLevel page</p>
         </div>
 
         <div class="field-group">
-          <span class="label">Placement relative to Infusionsoft form</span>
-          <div class="option-row">
-            <label class="option">
+          <label class="label-text">Placement Position</label>
+          <div class="radio-group">
+            <label class="radio-card">
               <input type="radio" name="placement" value="above" checked>
-              <span>Above the form</span>
+              <div class="radio-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect x="4" y="4" width="16" height="6" rx="2" stroke="currentColor" stroke-width="2"/>
+                  <rect x="4" y="14" width="16" height="6" rx="2" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                </svg>
+                <div>
+                  <div class="radio-title">Above Form</div>
+                  <div class="radio-hint">Content appears before the order form</div>
+                </div>
+              </div>
             </label>
-            <label class="option">
+            <label class="radio-card">
               <input type="radio" name="placement" value="below">
-              <span>Below the form</span>
+              <div class="radio-content">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect x="4" y="4" width="16" height="6" rx="2" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+                  <rect x="4" y="14" width="16" height="6" rx="2" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <div>
+                  <div class="radio-title">Below Form</div>
+                  <div class="radio-hint">Content appears after the order form</div>
+                </div>
+              </div>
             </label>
           </div>
-          <p class="hint">Snippets can be pasted into either the custom header or footer. They will position themselves automatically.</p>
+          <p class="hint">Both snippets work in custom header or footer sections</p>
         </div>
 
-        <div class="field-group">
-          <label for="formSelector">Infusionsoft form selector</label>
-          <input type="text" id="formSelector" name="formSelector" value="#content" required>
-          <p class="hint">Default <code>#content</code> works for most Infusionsoft order forms.</p>
-        </div>
+        <div class="advanced-section">
+          <button type="button" class="advanced-toggle" id="advanced-toggle">
+            <svg class="chevron" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M6 8L10 12L14 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Advanced Options
+          </button>
+          
+          <div class="advanced-content" id="advanced-content">
+            <div class="field-group">
+              <label for="formSelector">
+                <span class="label-text">Form Selector</span>
+              </label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M7 3H3V7M13 3H17V7M7 17H3V13M13 17H17V13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <input type="text" id="formSelector" name="formSelector" value="#content" required>
+              </div>
+              <p class="hint">CSS selector for your Infusionsoft form (default works for most cases)</p>
+            </div>
 
-        <div class="field-group">
-          <label for="buttonClass">GoHighLevel button class</label>
-          <input type="text" id="buttonClass" name="buttonClass" value="ghl-scroll-to-form" required>
-          <p class="hint">Apply this class to any button that should scroll the parent page to the form.</p>
-        </div>
+            <div class="field-group">
+              <label for="buttonClass">
+                <span class="label-text">Button Class Name</span>
+              </label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <rect x="3" y="7" width="14" height="6" rx="2" stroke="currentColor" stroke-width="2"/>
+                </svg>
+                <input type="text" id="buttonClass" name="buttonClass" value="ghl-scroll-to-form" required>
+              </div>
+              <p class="hint">Apply this class to buttons in GoHighLevel that trigger scrolling</p>
+            </div>
 
-        <div class="field-pair">
-          <div class="field-group">
-            <label for="minHeight">Minimum iframe height (px)</label>
-            <input type="number" id="minHeight" name="minHeight" value="600" min="200" step="50">
-          </div>
-          <div class="field-group">
-            <label for="scrollOffset">Scroll offset (px)</label>
-            <input type="number" id="scrollOffset" name="scrollOffset" value="-40" step="10">
-            <p class="hint">Negative values keep the form headline in view after scrolling.</p>
+            <div class="field-pair">
+              <div class="field-group">
+                <label for="minHeight">
+                  <span class="label-text">Min Height (px)</span>
+                </label>
+                <input type="number" id="minHeight" name="minHeight" value="600" min="200" step="50">
+              </div>
+              <div class="field-group">
+                <label for="scrollOffset">
+                  <span class="label-text">Scroll Offset (px)</span>
+                </label>
+                <input type="number" id="scrollOffset" name="scrollOffset" value="-40" step="10">
+                <p class="hint">Negative keeps headline visible</p>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="actions">
-          <button type="submit" class="primary">Generate snippets</button>
-          <button type="button" id="reset-btn" class="secondary">Reset</button>
+          <button type="submit" class="btn-primary">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 3V10M10 10V17M10 10H17M10 10H3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Generate Embed Code
+          </button>
+          <button type="button" id="reset-btn" class="btn-secondary">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10C4 6.68629 6.68629 4 10 4C13.3137 4 16 6.68629 16 10C16 13.3137 13.3137 16 10 16C7.87827 16 6.04344 14.8281 5.125 13.0625M5.125 13.0625V16.5M5.125 13.0625H8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Reset Form
+          </button>
         </div>
       </form>
     </section>
 
-    <section id="output" class="card output" hidden>
-      <div class="output-header">
-        <h2>Your snippets</h2>
-        <p>Paste the Infusionsoft snippet into the custom header or footer. Paste the GoHighLevel snippet into the page settings.</p>
+    <section id="output" class="card output-card" hidden>
+      <div class="success-banner">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          <path d="M8 12L11 15L16 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div>
+          <h3>Embed Code Generated Successfully!</h3>
+          <p>Copy and paste the snippets below into their respective platforms</p>
+        </div>
       </div>
 
-      <article class="snippet">
-        <header class="snippet-header">
-          <h3>Infusionsoft (Custom Header/Footer)</h3>
-          <button type="button" class="copy-btn" data-copy-target="infusionsoftCode">Copy</button>
-        </header>
+      <article class="snippet-card">
+        <div class="snippet-header">
+          <div class="snippet-info">
+            <div class="platform-badge infusionsoft">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <rect width="16" height="16" rx="4" fill="currentColor" opacity="0.2"/>
+                <path d="M5 8L7 10L11 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Infusionsoft
+            </div>
+            <h3>Custom Header/Footer Code</h3>
+          </div>
+          <button type="button" class="copy-btn" data-copy-target="infusionsoftCode">
+            <svg class="copy-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="7" y="7" width="10" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M13 7V5C13 3.89543 12.1046 3 11 3H5C3.89543 3 3 3.89543 3 5V11C3 12.1046 3.89543 13 5 13H7" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <span class="copy-text">Copy Code</span>
+            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M5 10L8 13L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
         <pre class="code-block"><code id="infusionsoftCode"></code></pre>
       </article>
 
-      <article class="snippet">
-        <header class="snippet-header">
-          <h3>GoHighLevel (Page Custom Code)</h3>
-          <button type="button" class="copy-btn" data-copy-target="gohighlevelCode">Copy</button>
-        </header>
+      <article class="snippet-card">
+        <div class="snippet-header">
+          <div class="snippet-info">
+            <div class="platform-badge gohighlevel">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <rect width="16" height="16" rx="4" fill="currentColor" opacity="0.2"/>
+                <path d="M5 8L7 10L11 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              GoHighLevel
+            </div>
+            <h3>Page Custom Code</h3>
+          </div>
+          <button type="button" class="copy-btn" data-copy-target="gohighlevelCode">
+            <svg class="copy-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <rect x="7" y="7" width="10" height="10" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M13 7V5C13 3.89543 12.1046 3 11 3H5C3.89543 3 3 3.89543 3 5V11C3 12.1046 3.89543 13 5 13H7" stroke="currentColor" stroke-width="2"/>
+            </svg>
+            <span class="copy-text">Copy Code</span>
+            <svg class="check-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M5 10L8 13L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
         <pre class="code-block"><code id="gohighlevelCode"></code></pre>
       </article>
 
-      <section class="notes">
-        <h3>Implementation checklist</h3>
-        <ul>
-          <li>Add <code>ghl-scroll-to-form</code> to each button that should trigger the scroll.</li>
-          <li>Publish your GoHighLevel page with the generated script inside the page head/footer.</li>
-          <li>Paste the Infusionsoft snippet into the order form custom header or footer.</li>
-          <li>Load the form page and confirm iframe resizing and scroll behavior.</li>
-        </ul>
-      </section>
+      <div class="implementation-guide">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M10 2V6M10 14V18M18 10H14M6 10H2M15.5 4.5L12.5 7.5M7.5 12.5L4.5 15.5M15.5 15.5L12.5 12.5M7.5 7.5L4.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          Implementation Steps
+        </h3>
+        <ol class="checklist">
+          <li>
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <strong>GoHighLevel Setup</strong>
+              <p>Add <code>ghl-scroll-to-form</code> class to buttons that should trigger scrolling</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <strong>Add GHL Script</strong>
+              <p>Paste the GoHighLevel code into your page's custom tracking code or footer section</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <strong>Configure Infusionsoft</strong>
+              <p>Paste the Infusionsoft code into your order form's custom header or footer</p>
+            </div>
+          </li>
+          <li>
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <strong>Test & Verify</strong>
+              <p>Load your form page and confirm iframe resizing and scroll behavior work correctly</p>
+            </div>
+          </li>
+        </ol>
+      </div>
     </section>
   </main>
 
   <footer class="app-footer">
-    <p>Need tweaks? Adjust the settings above and regenerate new snippets.</p>
+    <div class="footer-content">
+      <p>Built for seamless Infusionsoft & GoHighLevel integration</p>
+      <div class="footer-links">
+        <a href="https://github.com/rbradshaw9/infusionsoft-form-iframe-embed-dynamic-size" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M10 2C5.58172 2 2 5.58172 2 10C2 13.5423 4.29203 16.5475 7.47089 17.5421C7.87089 17.6147 8.01722 17.3559 8.01722 17.1319C8.01722 16.9318 8.01011 16.3853 8.00628 15.6638C5.67158 16.1576 5.20234 14.5766 5.20234 14.5766C4.83838 13.7116 4.30873 13.4538 4.30873 13.4538C3.57482 12.9468 4.36489 12.9569 4.36489 12.9569C5.17844 13.0152 5.60216 13.8064 5.60216 13.8064C6.32492 15.0472 7.48935 14.691 8.03103 14.4745C8.10361 13.9502 8.31145 13.5943 8.54283 13.3823C6.77164 13.1673 4.9067 12.4754 4.9067 9.45226C4.9067 8.63717 5.21549 7.96894 5.61755 7.44742C5.53658 7.23293 5.25846 6.42268 5.69439 5.30574C5.69439 5.30574 6.37553 5.07812 7.99654 6.16973C8.64118 5.98256 9.32331 5.88897 10.0013 5.88577C10.6793 5.88897 11.3615 5.98256 12.0075 6.16973C13.6272 5.07812 14.307 5.30574 14.307 5.30574C14.7442 6.42268 14.4661 7.23293 14.3851 7.44742C14.7885 7.96894 15.0947 8.63717 15.0947 9.45226C15.0947 12.4828 13.2258 13.1647 11.4493 13.3742C11.7391 13.6269 12.0001 14.1256 12.0001 14.8883C12.0001 15.978 11.9917 16.8589 11.9917 17.1319C11.9917 17.3584 12.1355 17.6197 12.541 17.5408C15.7148 16.5449 18 13.5397 18 10C18 5.58172 14.4183 2 10 2Z" fill="currentColor"/>
+          </svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
   </footer>
 
   <script src="script.js" defer></script>
